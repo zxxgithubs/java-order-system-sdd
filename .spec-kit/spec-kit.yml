@@ -1,0 +1,22 @@
+version: "1.0"
+ai:
+  provider: "GitHub Copilot"
+  constraints: "strict"
+  prompt_overrides: |
+    必须遵循Java规范：
+    1. 源码目录：src/main/java/com/your/project/
+    2. 测试目录：src/test/java/com/your/project/
+    3. 符合Alibaba Java Coding Guidelines，使用Spring Boot 3.2.x
+compliance:
+  enforce: true
+  checks: ["java-coding-style", "spring-boot-spec", "junit-test"]
+  source_paths: ["src/main/java", "src/test/java"]  # Spec Kit检查的Java源码路径
+  tools:
+    checkstyle:
+      config: ".spec-kit/config/checkstyle.xml"
+      paths: ["src/main/java"]
+    pmd:
+      config: ".spec-kit/config/pmd-ruleset.xml"
+      paths: ["src/main/java"]
+team:
+  reviewers: ["java-tech-lead"]  # 规范变更审核人
